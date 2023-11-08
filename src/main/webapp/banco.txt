@@ -1,0 +1,22 @@
+
+create database `iftm-vendas-teste`
+;
+use `iftm-vendas-teste`;
+
+create table `usuario` (
+	codigo int auto_increment primary key,
+    nome varchar(60),
+    email varchar(100),
+    senha varchar(80),
+    data_cadastro Datetime
+);
+
+
+create table `produto` (
+	id int not null auto_increment primary key,
+    nome varchar(60),
+    descricao varchar(200),
+    preco decimal(9,2),
+    marca varchar(60),
+    cor varchar(10)
+);
