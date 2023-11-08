@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="crudBean" required="true" shortDescription="Classe crud relacionda a tela em questão."></cc:attribute>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p:toolbar>
+            <p:toolbarGroup align="left">
+                <p:commandButton icon="pi pi-file" update="@form" value="Novo" actionListener="#{cc.attrs.crudBean.novo()}"></p:commandButton>
+                <p:spacer width="10"></p:spacer>
+                <p:commandButton icon="pi pi-save" actionListener="#{cc.attrs.crudBean.salvar()}" rendered="#{cc.attrs.crudBean.estadoTela.name() != 'PESQUISAR'}" update="@form" value="Salvar"></p:commandButton>
+                <p:spacer width="10" rendered="#{cc.attrs.crudBean.estadoTela.name() != 'PESQUISAR'}"></p:spacer>
+                <p:commandButton icon="pi #{cc.attrs.crudBean.estadoTela.name() != 'PESQUISAR' ? 'pi-arrow-left' : 'pi-search'}"  update="@form" value="#{cc.attrs.crudBean.estadoTela.name() != 'PESQUISAR' ? 'Voltar' : 'Pesquisar'}" actionListener="#{cc.attrs.crudBean.pesquisar()}"></p:commandButton>
+            </p:toolbarGroup>
+            <p:toolbarGroup align="right">
+                <cc:insertChildren></cc:insertChildren>
+            </p:toolbarGroup>
+        </p:toolbar>
+    </cc:implementation>
+</html>

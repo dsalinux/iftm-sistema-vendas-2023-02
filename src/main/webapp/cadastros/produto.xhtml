@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:if="http://xmlns.jcp.org/jsf/composite/if">
+    
+    <h1>Cadastro Produto</h1>
+    <h:form>
+
+        <if:toolbarCrud crudBean="#{produtoBean}"/>
+        
+        <p:messages showDetail="true" skipDetailIfEqualsSummary="true"></p:messages>
+        <p:growl showDetail="true"></p:growl>
+        
+        <p:panelGrid columns="2" layout="tabular" rendered="#{produtoBean.estadoTela.name() != 'PESQUISAR'}">
+            <p:outputLabel for="@next" value="Nome"></p:outputLabel>
+            <p:inputText value="#{produtoBean.entidade.nome}"></p:inputText>
+            
+            <p:outputLabel for="@next" value="Descrição"></p:outputLabel>
+            <p:inputText value="#{produtoBean.entidade.descricao}"></p:inputText>
+            
+            <p:outputLabel for="@next" value="Preço"></p:outputLabel>
+            <p:inputNumber value="#{produtoBean.entidade.preco}" symbol="R$ "></p:inputNumber>
+            
+            <p:outputLabel for="@next" value="Marca"></p:outputLabel>
+            <p:selectOneMenu value="#{produtoBean.entidade.marca}">
+                <f:selectItem itemLabel="Selecione" noSelectionOption="true"></f:selectItem>
+                <f:selectItem itemLabel="Adidas" itemValue="Adidas"></f:selectItem>
+                <f:selectItem itemLabel="Nike" itemValue="Nike"></f:selectItem>
+                <f:selectItem itemLabel="Penalti" itemValue="Penalti"></f:selectItem>
+                <f:selectItem itemLabel="Jordan" itemValue="Jordan"></f:selectItem>
+            </p:selectOneMenu>
+            
+            <p:outputLabel for="@next" value="Cor"></p:outputLabel>
+            <p:colorPicker value="#{produtoBean.entidade.cor}"></p:colorPicker>
+        </p:panelGrid>
+        
+        <p:dataTable value="#{produtoBean.entidades}" var="produto"  rendered="#{produtoBean.estadoTela.name() == 'PESQUISAR'}">
+            <p:column>
+                <p:commandButton icon="pi pi-trash" actionListener="#{produtoBean.deletar(produto)}" update="@form"></p:commandButton>
+                <p:commandButton icon="pi pi-pencil" actionListener="#{produtoBean.editar(produto)}" update="@form"></p:commandButton>
+            </p:column>
+            <p:column headerText="Nome">
+                #{produto.nome}
+            </p:column>
+            <p:column headerText="Preço">
+                #{produto.preco}
+            </p:column>
+            <p:column headerText="Marca">
+                #{produto.marca}
+            </p:column>
+            <p:column headerText="Cor">
+                <div style="width: 20px; height: 20px; background-color: #{produto.cor}"></div>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+       
+</ui:composition>

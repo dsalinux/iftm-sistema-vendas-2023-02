@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <!--<link rel="stylesheet" href="resources/aula/css/estilo.css"></link>-->
+        <h:outputStylesheet library="aula" name="css/estilo.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <header>
+                <h:form>
+                    <p:menubar>
+                        <p:menuitem url="index.xhtml" styleClass="item-logo" containerStyleClass="removePadding">
+                            <h:graphicImage styleClass="logo" library="aula" name="imagens/logo.png"></h:graphicImage>
+                        </p:menuitem>
+                        <p:menuitem url="#{request.servletContext.contextPath}/index.xhtml" value="Inicio"></p:menuitem>
+                        <p:submenu label="Cadastros">
+                            <p:menuitem value="Usuários" url="#{request.servletContext.contextPath}/cadastros/usuario.xhtml"></p:menuitem>
+                            <p:menuitem value="Clientes"></p:menuitem>
+                            <p:menuitem value="Produtos"  url="#{request.servletContext.contextPath}/cadastros/produto.xhtml"></p:menuitem>
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+        </header>
+        <main>
+            <ui:insert></ui:insert>
+        </main>
+        
+        <footer>
+            IFTM - 2023 - Opensource Project
+        </footer>
+    </h:body>
+</html>
