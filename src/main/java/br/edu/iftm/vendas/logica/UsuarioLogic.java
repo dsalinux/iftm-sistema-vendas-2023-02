@@ -27,7 +27,7 @@ public class UsuarioLogic implements CrudLogic<Usuario>{
 
     @Override
     public void remover(Usuario entidade) throws ErroSistemaException, ErroNegocioException {
-        dao.remover(entidade);
+        dao.remover(entidade.getId());
     }
 
     @Override
