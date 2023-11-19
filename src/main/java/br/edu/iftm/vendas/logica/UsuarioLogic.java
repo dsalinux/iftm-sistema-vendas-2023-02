@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import org.hibernate.Hibernate;
 
 public class UsuarioLogic implements CrudLogic<Usuario>{
 
@@ -32,7 +33,9 @@ public class UsuarioLogic implements CrudLogic<Usuario>{
 
     @Override
     public Usuario buscarPorID(Usuario entidade) throws ErroSistemaException, ErroNegocioException {
-        return null;
+        Usuario usuario = dao.buscarPorID(entidade.getId());
+        usuario.getPermissoes().size();
+        return usuario;
     }
 
     @Override

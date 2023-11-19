@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:if="http://xmlns.jcp.org/jsf/composite/if">
+    
+    <h1>Cadastro Permissões</h1>
+    <h:form>
+
+        <if:toolbarCrud crudBean="#{permissaoBean}" ></if:toolbarCrud>
+        
+        <p:messages showDetail="true" skipDetailIfEqualsSummary="true"></p:messages>
+        <p:growl showDetail="true"></p:growl>
+        
+        <p:panelGrid columns="2" layout="tabular" rendered="#{permissaoBean.estadoTela.name() != 'PESQUISAR'}">
+            <p:outputLabel for="@next" value="Nome"></p:outputLabel>
+            <p:inputText value="#{permissaoBean.entidade.nome}"></p:inputText>
+            
+            <p:outputLabel for="@next" value="Descrição"></p:outputLabel>
+            <p:inputText value="#{permissaoBean.entidade.descricao}"></p:inputText>
+            
+        </p:panelGrid>
+        
+        <p:dataTable value="#{permissaoBean.entidades}" var="entity"  rendered="#{permissaoBean.estadoTela.name() == 'PESQUISAR'}">
+            <p:column>
+                <p:commandButton value="Remover" actionListener="#{permissaoBean.deletar(entity)}" update="@form"></p:commandButton>
+                <p:commandButton value="Editar" actionListener="#{permissaoBean.editar(entity)}" update="@form"></p:commandButton>
+            </p:column>
+            <p:column headerText="Nome">
+                #{entity.nome}
+            </p:column>
+            <p:column headerText="Descrição">
+                #{entity.descricao}
+            </p:column>
+        </p:dataTable>
+    </h:form>
+       
+</ui:composition>

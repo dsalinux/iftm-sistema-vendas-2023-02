@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.edu.iftm.vendas.dao;
 
 import br.edu.iftm.vendas.entidade.Usuario;
@@ -11,10 +7,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-/**
- *
- * @author danilo
- */
 public abstract class GenericDAO<E, ID> implements Serializable{
     @Inject
     private EntityManager manager;
@@ -38,6 +30,11 @@ public abstract class GenericDAO<E, ID> implements Serializable{
         manager.getTransaction().commit();
     }
 
+    public E buscarPorID(ID id) {
+        E entity = manager.find(classEntity, id);
+        return entity;
+    }
+    
     public List<E> listar() throws ErroSistemaException {
         List<E> entitys = manager.createQuery("from "+classEntity.getCanonicalName()).getResultList();
         return entitys;

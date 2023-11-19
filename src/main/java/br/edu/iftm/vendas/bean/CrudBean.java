@@ -70,8 +70,15 @@ public abstract class CrudBean<E, L extends CrudLogic<E>> extends JSFUtil {
     }
 
     public void editar(E entidade) {
-        this.entidade = entidade;
-        estadoTela = EstadoTela.EDITAR;
+        try {
+            this.entidade = getLogic().buscarPorID(entidade);
+            estadoTela = EstadoTela.EDITAR;
+        }  catch (ErroSistemaException ex) {
+            addErro(ex);
+            Logger.getLogger(CrudBean.class.getName()).log(Level.SEVERE, ex.getMessage());
+        } catch (ErroNegocioException ex) {
+            addAviso(ex.getMessage());
+        }
     }
 
     public void pesquisar() {

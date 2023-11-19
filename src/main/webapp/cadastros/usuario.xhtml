@@ -5,7 +5,8 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/template.xhtml"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:if="http://xmlns.jcp.org/jsf/composite/if">
+                xmlns:if="http://xmlns.jcp.org/jsf/composite/if"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <h1>Cadastro Usuário</h1>
     <h:form>
@@ -24,6 +25,12 @@
             
             <p:outputLabel for="@next" value="Senha"></p:outputLabel>
             <p:password value="#{usuarioBean.entidade.senha}"></p:password>
+            
+            <p:outputLabel for="@next" value="Permissões"></p:outputLabel>
+            <p:selectCheckboxMenu value="#{usuarioBean.entidade.permissoes}" multiple="true" emptyLabel="Selecione as permissões">
+                <f:attribute name="collectionType" value="java.util.ArrayList" />
+                <f:selectItems value="#{usuarioBean.permissoes}" var="permissao" itemLabel="#{permissao.nome}" itemValue="#{permissao}"></f:selectItems>
+            </p:selectCheckboxMenu>
             
         </p:panelGrid>
         
