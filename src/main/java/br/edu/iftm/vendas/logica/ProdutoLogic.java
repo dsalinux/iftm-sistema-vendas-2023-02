@@ -28,12 +28,12 @@ public class ProdutoLogic implements CrudLogic<Produto> {
 
     @Override
     public void remover(Produto entidade) throws ErroSistemaException, ErroNegocioException {
-        dao.remover(entidade);
+        dao.remover(entidade.getId());
     }
 
     @Override
     public Produto buscarPorID(Produto entidade) throws ErroSistemaException, ErroNegocioException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return dao.buscarPorID(entidade.getId());
     }
 
     @Override

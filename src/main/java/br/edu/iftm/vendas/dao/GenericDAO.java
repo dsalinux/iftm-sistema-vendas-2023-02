@@ -18,9 +18,14 @@ public abstract class GenericDAO<E, ID> implements Serializable{
     }
     
     public void salvar(E entity) throws ErroSistemaException {
+        try {
         manager.getTransaction().begin();
         manager.merge(entity);
         manager.getTransaction().commit();
+        } catch (Exception ex) {
+            manager.getTransaction().rollback();
+            throw new ErroSistemaException("Erro ao salvar.", ex);
+        }
     }
 
     public void remover(ID id) throws ErroSistemaException {

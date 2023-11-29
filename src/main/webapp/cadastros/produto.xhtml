@@ -23,6 +23,12 @@
             <p:outputLabel for="@next" value="Descrição"></p:outputLabel>
             <p:inputText value="#{produtoBean.entidade.descricao}"></p:inputText>
             
+            <p:outputLabel for="@next" value="Categoria"></p:outputLabel>
+            <p:selectOneMenu value="#{produtoBean.entidade.categoria}" converter="categoriaConverter">
+                <f:selectItem itemLabel="Selecione" noSelectionOption="true"></f:selectItem>
+                <f:selectItems value="#{produtoBean.categorias}" var="cat" itemLabel="#{cat.nome}" itemValue="#{cat}"></f:selectItems>
+            </p:selectOneMenu>
+            
             <p:outputLabel for="@next" value="Preço"></p:outputLabel>
             <p:inputNumber value="#{produtoBean.entidade.preco}" symbol="R$ "></p:inputNumber>
             

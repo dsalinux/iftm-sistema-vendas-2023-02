@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:if="http://xmlns.jcp.org/jsf/composite/if"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h1>Cadastro Categoria</h1>
+    <h:form>
+
+        <if:toolbarCrud crudBean="#{categoriaBean}" ></if:toolbarCrud>
+        
+        <p:messages showDetail="true" skipDetailIfEqualsSummary="true"></p:messages>
+        <p:growl showDetail="true"></p:growl>
+        
+        <p:panelGrid columns="2" layout="tabular" rendered="#{categoriaBean.estadoTela.name() != 'PESQUISAR'}">
+            <p:outputLabel for="@next" value="Nome"></p:outputLabel>
+            <p:inputText value="#{categoriaBean.entidade.nome}"></p:inputText>
+            
+            <p:outputLabel for="@next" value="Categoria Superior"></p:outputLabel>
+            <p:selectOneMenu value="#{categoriaBean.entidade.categoriaSuperior}" converter="categoriaConverter">
+                <f:selectItem itemLabel="Nenhuma categoria supeior" itemValue="#{null}"></f:selectItem>
+                <f:selectItems value="#{categoriaBean.categorias}" var="categoria" itemLabel="#{categoria.nome}" 
+                               itemValue="#{categoria}"></f:selectItems>
+            </p:selectOneMenu>
+            
+        </p:panelGrid>
+        
+        <p:dataTable value="#{categoriaBean.entidades}" var="entity"  rendered="#{categoriaBean.estadoTela.name() == 'PESQUISAR'}">
+            <p:column>
+                <p:commandButton value="Remover" actionListener="#{categoriaBean.deletar(entity)}" update="@form"></p:commandButton>
+                <p:commandButton value="Editar" actionListener="#{categoriaBean.editar(entity)}" update="@form"></p:commandButton>
+            </p:column>
+            <p:column headerText="Nome">
+                #{entity.nome}
+            </p:column>
+            <p:column headerText="Categoria Superior">
+                #{entity.categoriaSuperior != null?entity.categoriaSuperior.nome:''}
+            </p:column>
+        </p:dataTable>
+    </h:form>
+       
+</ui:composition>

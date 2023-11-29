@@ -5,33 +5,45 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Sistema Financeiro</title>
         <!--<link rel="stylesheet" href="resources/aula/css/estilo.css"></link>-->
-        <h:outputStylesheet library="aula" name="css/estilo.css"></h:outputStylesheet>
+        <!--<h:outputStylesheet library="aula" name="css/estilo.css"></h:outputStylesheet>-->
+        <h:outputStylesheet library="aula" name="css/admin_principal.css"></h:outputStylesheet>
     </h:head>
     <h:body>
+        <aside class="menu">
+            <div class="logo">
+                <h:graphicImage library="aula" name="imagens/logo.png"></h:graphicImage>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#{request.servletContext.contextPath}/index.xhtml" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                    <li><a href="#{request.servletContext.contextPath}/cadastros/usuario.xhtml"><i class="fa-solid fa-user"></i> Usuários</a></li>
+                    <li><a href="#{request.servletContext.contextPath}/cadastros/permissao.xhtml"><i class="fa-solid fa-list-check"></i> Permissões</a></li>
+                    <li><a href="#{request.servletContext.contextPath}/cadastros/categoria.xhtml"><i class="fa-solid fa-list"></i> Categoria</a></li>
+                    <li><a href="#{request.servletContext.contextPath}/cadastros/produto.xhtml"><i class="fa-solid fa-box"></i> Produtos</a></li>
+                    <li><a href="index.html"><i class="fa-solid fa-cash-register"></i> Financeiro</a></li>
+                    <li><a href="index.html"><i class="fa-solid fa-boxes-stacked"></i> Estoque</a></li>
+                    <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> Relatórios</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <div class="overlay-menu"></div>
         <header>
-                <h:form>
-                    <p:menubar>
-                        <p:menuitem url="index.xhtml" styleClass="item-logo" containerStyleClass="removePadding">
-                            <h:graphicImage styleClass="logo" library="aula" name="imagens/logo.png"></h:graphicImage>
-                        </p:menuitem>
-                        <p:menuitem url="#{request.servletContext.contextPath}/index.xhtml" value="Inicio"></p:menuitem>
-                        <p:submenu label="Cadastros">
-                            <p:menuitem value="Usuários" url="#{request.servletContext.contextPath}/cadastros/usuario.xhtml"></p:menuitem>
-                            <p:menuitem value="Permissões" url="#{request.servletContext.contextPath}/cadastros/permissao.xhtml"></p:menuitem>
-                            <p:menuitem value="Clientes"></p:menuitem>
-                            <p:menuitem value="Produtos"  url="#{request.servletContext.contextPath}/cadastros/produto.xhtml"></p:menuitem>
-                        </p:submenu>
-                    </p:menubar>
-                </h:form>
+            <a href="#" class="btn-toogle-menu" title="Toogle menu"><i class="fa-solid fa-bars"></i></a>
+            <h1>#{titulo != null ?titulo:"Sistema Financeiro"}</h1>
         </header>
         <main>
-            <ui:insert></ui:insert>
+            <div class="content">
+                <ui:insert></ui:insert>
+            </div>
         </main>
-        
         <footer>
-            IFTM - 2023 - Opensource Project
+            <p> IFTM - 2023 - Opensource Project</p>
         </footer>
+
+        <script src="https://kit.fontawesome.com/dcdd1dcc23.js" crossorigin="anonymous"></script>
+        <h:outputScript library="aula" name="js/script.js"></h:outputScript>
+
     </h:body>
 </html>
